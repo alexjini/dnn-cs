@@ -38,7 +38,7 @@ Y_test = np_utils.to_categorical(y_test, nb_classes)
 
 model = Sequential()
 model.add(Dense(10, init='uniform', input_shape=(784,)))
-model.add(Activation('softmax'))
+model.add(Activation('sigmoid'))
 
 model.compile(loss='mse', optimizer='sgd')
 
