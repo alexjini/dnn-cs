@@ -4,12 +4,12 @@
 
 ## 코드 구성
 * [mnist_shallow.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_cnn_sigmoid.py)
-    + MNIST 데이터의 구분을 위한 얕은 네트워크(shallow network)를 구성해 훈련하고, 결과를 확인
+    + MNIST 데이터의 구분을 위한 얕은 네트워크(shallow network)를 구성해 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
 * [mnist_cnn_sigmoid_shallow.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_cnn_sigmoid.py)
-    + CNN(Convolutional Neural Network) 네트워크 구조를 이용해 MNIST 데이터를 훈련하고, 결과를 확인
+    + CNN(Convolutional Neural Network) 네트워크 구조를 이용해 MNIST 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
     + 계산 유닛으로 sigmoid를 사용
 * [mnist_cnn_sigmoid.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_cnn_sigmoid.py)
-    + CNN(Convolutional Neural Network) 네트워크 구조를 더 쌓아 구성한 Deep Convolutional Network를 이용해 MNIST 데이터를 훈련하고, 결과를 확인
+    + CNN(Convolutional Neural Network) 네트워크 구조를 더 쌓아 구성한 deep Convolutional Network를 이용해 MNIST 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드 
     + 계산 유닛으로 sigmoid를 사용
       
 ## GPU 사용
