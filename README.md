@@ -3,14 +3,12 @@
 * 해당 코드를 이용해 실습을 진행하기 위해서는 [Python 2.7](https://www.python.org/), [Theano](http://deeplearning.net/software/theano/#), [Keras library](http://keras.io)가 필요합니다.
 
 ## 코드 구성
-* [mnist_shallow.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_cnn_sigmoid.py)
+* [mnist_shallow.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_shallow.py)
     + MNIST 데이터의 구분을 위한 얕은 네트워크(shallow network)를 구성해 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
-* [mnist_cnn_sigmoid_shallow.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_cnn_sigmoid.py)
+* [mnist_cnn_shallow.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_cnn_shallow.py)
     + CNN(Convolutional Neural Network) 네트워크 구조를 이용해 MNIST 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
-    + 계산 유닛으로 sigmoid를 사용
-* [mnist_cnn_sigmoid.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_cnn_sigmoid.py)
+* [mnist_cnn.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_cnn.py)
     + CNN(Convolutional Neural Network) 네트워크 구조를 더 쌓아 구성한 deep Convolutional Network를 이용해 MNIST 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드 
-    + 계산 유닛으로 sigmoid를 사용
       
 ## GPU 사용
 * GPU 사용이 가능한 컴퓨터의 경우, Theano에서 제공하는 GPU 병렬화 기능을 사용하기 위해서는 Theano flag를 GPU 계산을 위해 셋팅해야 함.

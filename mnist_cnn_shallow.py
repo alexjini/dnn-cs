@@ -24,10 +24,10 @@ nb_epoch = 12
 img_rows, img_cols = 28, 28
 # number of convolutional filters to use
 nb_filters = 3
-# size of pooling area for max pooling
-nb_pool = 2
 # convolution kernel size
 nb_conv = 3
+# size of pooling area for max pooling
+nb_pool = 2
 
 # the data, shuffled and split between tran and test sets
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
@@ -52,8 +52,6 @@ model.add(Convolution2D(nb_filters, nb_conv, nb_conv,
                         border_mode='valid',
                         input_shape=(1, img_rows, img_cols)))
 model.add(Activation('sigmoid'))
-#model.add(Convolution2D(nb_filters, nb_conv, nb_conv))
-#model.add(Activation('sigmoid'))
 model.add(MaxPooling2D(pool_size=(nb_pool, nb_pool)))
 model.add(Dropout(0.25))
 
@@ -64,10 +62,11 @@ model.add(Dropout(0.5))
 model.add(Dense(nb_classes))
 model.add(Activation('softmax'))
 
-model.compile(loss='categorical_crossentropy', optimizer='adadelta')
+model.compile(loss='mse', optimizer='sgd')
 
-model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch,
-          show_accuracy=True, verbose=1, validation_data=(X_test, Y_test))
+hist = model.fit(X_train, Y_train, batch_size=batch_size, 
+                 nb_epoch=nb_epoch, show_accuracy=True, 
+				 verbose=1, validation_split=0.2)
 score = model.evaluate(X_test, Y_test, show_accuracy=True, verbose=0)
 print('Test score:', score[0])
 print('Test accuracy:', score[1])

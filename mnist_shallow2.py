@@ -18,7 +18,7 @@ from keras.utils import np_utils
 
 batch_size = 128
 nb_classes = 10
-nb_epoch = 12
+nb_epoch = 120
 
 # the data, shuffled and split between tran and test sets
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
@@ -37,12 +37,14 @@ Y_train = np_utils.to_categorical(y_train, nb_classes)
 Y_test = np_utils.to_categorical(y_test, nb_classes)
 
 model = Sequential()
-model.add(Dense(10, init='uniform', input_shape=(784,)))
+model.add(Dense(100, init='uniform', input_shape=(784,)))
+model.add(Activation('sigmoid'))
+model.add(Dense(10, init='uniform', input_shape=(100,)))
 model.add(Activation('softmax'))
 
 model.compile(loss='mse', optimizer='sgd')
 
-hist = model.fit(X_train, Y_train, batch_size=batch_size,
+hist = model.fit(X_train, Y_train, batch_size=batch_size, 
                  nb_epoch=nb_epoch, show_accuracy=True,
                  verbose=1, validation_split=0.2)
 
