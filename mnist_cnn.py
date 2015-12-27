@@ -18,7 +18,7 @@ from keras.utils import np_utils
 
 batch_size = 128
 nb_classes = 10
-nb_epoch = 12
+nb_epoch = 20
 
 # input image dimensions
 img_rows, img_cols = 28, 28
@@ -64,7 +64,7 @@ model.add(Dropout(0.5))
 model.add(Dense(nb_classes))
 model.add(Activation('softmax'))
 
-model.compile(loss='mse', optimizer='sgd')
+model.compile(loss='categorical_crossentropy', optimizer='adadelta')
 
 hist = model.fit(X_train, Y_train, batch_size=batch_size, 
                  nb_epoch=nb_epoch, show_accuracy=True, 

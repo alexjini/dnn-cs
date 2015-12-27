@@ -62,7 +62,7 @@ model.add(Dropout(0.5))
 model.add(Dense(nb_classes))
 model.add(Activation('softmax'))
 
-model.compile(loss='mse', optimizer='sgd')
+model.compile(loss='categorical_crossentropy', optimizer='adadelta')
 
 hist = model.fit(X_train, Y_train, batch_size=batch_size, 
                  nb_epoch=nb_epoch, show_accuracy=True, 
