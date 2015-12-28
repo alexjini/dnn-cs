@@ -25,7 +25,7 @@ img_rows, img_cols = 28, 28
 # number of convolutional filters to use
 nb_filters = 3
 # convolution kernel size
-nb_conv = 3
+nb_conv = 5
 # size of pooling area for max pooling
 nb_pool = 2
 
