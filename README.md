@@ -3,21 +3,21 @@
 * 해당 코드를 이용해 실습을 진행하기 위해서는 [Python 2.7](https://www.python.org/), [Theano](http://deeplearning.net/software/theano/#), [Keras library](http://keras.io)가 필요합니다.
 
 ## 코드 구성
-* [mnist_shallow.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_shallow.py)
+* [mnist_shallow.py](https://github.com/snu-stat/dnn-cs/blob/master/mnist_shallow.py)
     + MNIST 데이터의 구분을 위한 얕은 네트워크(shallow network)를 구성해 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
-* [mnist_cnn_shallow.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_cnn_shallow.py)
+* [mnist_cnn_shallow.py](https://github.com/snu-stat/dnn-cs/blob/master/mnist_cnn_shallow.py)
     + CNN(Convolutional Neural Network) 네트워크 구조를 이용해 MNIST 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
-* [mnist_cnn.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_cnn.py)
+* [mnist_cnn.py](https://github.com/snu-stat/dnn-cs/blob/master/mnist_cnn.py)
     + CNN(Convolutional Neural Network) 네트워크 구조를 더 쌓아 구성한 deep Convolutional Network를 이용해 MNIST 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드 
-* [mnist_cnn_part2.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/mnist_cnn_part2.py)
+* [mnist_cnn_part2.py](https://github.com/snu-stat/dnn-cs/blob/master/mnist_cnn_part2.py)
     + CNN 네트워크 구조를 이용해 MNIST 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
     + Model, weight, history를 저장
-* [cifar10_cnn.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/cifar10_cnn.py)
+* [cifar10_cnn.py](https://github.com/snu-stat/dnn-cs/blob/master/cifar10_cnn.py)
     + CNN 네트워크 구조를 이용해 CIFAR-10 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
     + Model, weight, history를 저장
-* [test_mnist_cnn.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/test_mnist_cnn.py)
+* [test_mnist_cnn.py](https://github.com/snu-stat/dnn-cs/blob/master/test_mnist_cnn.py)
     + MNIST 데이터를 이용해 훈련된 네트워크를 불러와, model, history, 각 층의 결과를 확인하는 코드
-* [test_cifar10_cnn.py](https://github.com/snu-stat/dnn-cs-posco/blob/master/test_cifar10_cnn.py)
+* [test_cifar10_cnn.py](https://github.com/snu-stat/dnn-cs/blob/master/test_cifar10_cnn.py)
     + CIFAR-10 데이터를 이용해 훈련된 네트워크를 불러와, model, history, 각 층의 결과를 확인하는 코드
 
 ## GPU 사용
