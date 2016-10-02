@@ -5,13 +5,10 @@
 ## 코드 구성
 * [mnist_shallow.py](https://github.com/snu-stat/dnn-cs/blob/master/mnist_shallow.py)
     + MNIST 데이터의 구분을 위한 얕은 네트워크(shallow network)를 구성해 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
-* [mnist_cnn_shallow.py](https://github.com/snu-stat/dnn-cs/blob/master/mnist_cnn_shallow.py)
-    + CNN(Convolutional Neural Network) 네트워크 구조를 이용해 MNIST 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
+* [mnist_deep.py](https://github.com/snu-stat/dnn-cs/blob/master/mnist_deep.py)
+    + MNIST 데이터의 구분을 위한 깊은 네트워크(deep network)를 구성해 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
 * [mnist_cnn.py](https://github.com/snu-stat/dnn-cs/blob/master/mnist_cnn.py)
     + CNN(Convolutional Neural Network) 네트워크 구조를 더 쌓아 구성한 deep Convolutional Network를 이용해 MNIST 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드 
-* [mnist_cnn_part2.py](https://github.com/snu-stat/dnn-cs/blob/master/mnist_cnn_part2.py)
-    + CNN 네트워크 구조를 이용해 MNIST 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
-    + Model, weight, history를 저장
 * [cifar10_cnn.py](https://github.com/snu-stat/dnn-cs/blob/master/cifar10_cnn.py)
     + CNN 네트워크 구조를 이용해 CIFAR-10 데이터를 훈련하고, 훈련을 마친 네트워크의 정확도를 확인하는 코드
     + Model, weight, history를 저장

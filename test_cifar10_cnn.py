@@ -4,6 +4,8 @@ from keras.datasets import cifar10
 from keras.models import Sequential
 
 from keras.models import model_from_json
+from keras.utils.visualize_util import plot
+from keras import backend as K
 import matplotlib.pyplot as plt
 import theano
 import json
@@ -18,6 +20,12 @@ img_channels = 3
 
 # the data, shuffled and split between tran and test sets
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
+if K.image_dim_ordering() == 'th':
+    X_test = X_test.reshape(X_test.shape[0], img_channels, img_rows, img_cols)
+    input_shape = (img_channels, img_rows, img_cols)
+else:
+    X_test = X_test.reshape(X_test.shape[0], img_rows, img_cols, img_channels)
+    input_shape = (img_rows, img_cols, img_channels)
 X_test = X_test.astype('float32')
 X_test /= 255
 print(X_test.shape[0], 'test samples')
@@ -25,6 +33,7 @@ print(X_test.shape[0], 'test samples')
 # Reconstruct model
 model = model_from_json(open('cifar10_model_architecture.json').read())
 model.load_weights('cifar10_model_weights.h5')
+plot(model, to_file='model.png')
 
 # Plot history 
 hist = json.loads(open('cifar10_model_history.json').read())
@@ -48,18 +57,18 @@ plt.tight_layout()
 plt.show()
 
 # Get output of each layer
-get_1st_layer_output = theano.function([model.layers[0].input], model.layers[1].get_output(train=False))
-get_2nd_layer_output = theano.function([model.layers[0].input], model.layers[3].get_output(train=False))
-get_3rd_layer_output = theano.function([model.layers[0].input], model.layers[8].get_output(train=False))
-get_last_layer_output = theano.function([model.layers[0].input], model.layers[11].get_output(train=False))
+get_1st_layer_output = K.function([model.layers[0].input, K.learning_phase()], [model.layers[0].output])
+get_2nd_layer_output = K.function([model.layers[0].input, K.learning_phase()], [model.layers[2].output])
+get_3rd_layer_output = K.function([model.layers[0].input, K.learning_phase()], [model.layers[7].output])
+get_last_layer_output = K.function([model.layers[0].input, K.learning_phase()], [model.layers[10].output])
 print('X_test image shape:', X_test.shape)
-layer_1_output = get_1st_layer_output(X_test)
+layer_1_output = get_1st_layer_output([X_test,0])[0]
 print('Print 1st layer output', layer_1_output.shape)
-layer_2_output = get_2nd_layer_output(X_test)
+layer_2_output = get_2nd_layer_output([X_test,0])[0]
 print('Print 2nd layer output', layer_2_output.shape)
-layer_3_output = get_3rd_layer_output(X_test)
+layer_3_output = get_3rd_layer_output([X_test,0])[0]
 print('Print 3rd layer output', layer_3_output.shape)
-layer_last_output = get_last_layer_output(X_test)
+layer_last_output = get_last_layer_output([X_test,0])[0]
 print('Print last layer output', layer_last_output.shape)
 
 # Predict classes and probability
@@ -73,29 +82,29 @@ def plotvalue(index):
         plt.figure('Input data and 1~4 layer output value of X_test[{idx}]'.format(idx=index), figsize=(12,9), dpi=100)
         plt.subplot2grid((5,8),(0,0),rowspan=2,colspan=2)
         plt.title('Input data')
-        plt.imshow(X_test[index].transpose(1,2,0))
+        plt.imshow(X_test[index])
 
         plt.subplot2grid((5,8),(0,2))
-        plt.imshow(layer_1_output[index][0], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][:,:,0], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(0,3))
-        plt.imshow(layer_1_output[index][1], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][:,:,1], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(0,4))
-        plt.imshow(layer_1_output[index][2], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][:,:,2], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(1,2))
-        plt.imshow(layer_1_output[index][3], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][:,:,3], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(1,3))
-        plt.imshow(layer_1_output[index][4], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][:,:,4], cmap='bone', interpolation='nearest')
 
         plt.subplot2grid((5,8),(0,5))
-        plt.imshow(layer_2_output[index][0], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][:,:,0], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(0,6))
-        plt.imshow(layer_2_output[index][1], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][:,:,1], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(0,7))
-        plt.imshow(layer_2_output[index][2], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][:,:,2], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(1,5))
-        plt.imshow(layer_2_output[index][3], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][:,:,3], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(1,6))
-        plt.imshow(layer_2_output[index][4], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][:,:,4], cmap='bone', interpolation='nearest')
 
         plt.subplot2grid((5,8),(2,0),colspan=8)
         plt.imshow(layer_3_output[index].reshape(1,layer_3_output.shape[1]), cmap='bone', interpolation='nearest')

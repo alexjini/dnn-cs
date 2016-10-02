@@ -1,5 +1,4 @@
 '''Train a simple deep CNN on the CIFAR10 small images dataset.
-
 GPU run command:
     THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python cifar10_cnn.py
 '''
@@ -16,6 +15,7 @@ from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import SGD, Adadelta, Adagrad
 from keras.utils import np_utils, generic_utils
+from keras import backend as K
 
 batch_size = 128
 nb_classes = 10
@@ -35,6 +35,15 @@ nb_pool = 2
 # the data, shuffled and split between train and test sets
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
 
+if K.image_dim_ordering() == 'th':
+    X_train = X_train.reshape(X_train.shape[0], img_channels, img_rows, img_cols)
+    X_test = X_test.reshape(X_test.shape[0], img_channels, img_rows, img_cols)
+    input_shape = (img_channels, img_rows, img_cols)
+else:
+    X_train = X_train.reshape(X_train.shape[0], img_rows, img_cols, img_channels)
+    X_test = X_test.reshape(X_test.shape[0], img_rows, img_cols, img_channels)
+    input_shape = (img_rows, img_cols, img_channels)
+
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
 X_train /= 255
@@ -51,16 +60,16 @@ model = Sequential()
 
 model.add(Convolution2D(nb_filters, nb_conv, nb_conv,
                         border_mode='same',
-                        input_shape=(img_channels, img_rows, img_cols)))
-model.add(Activation('sigmoid'))
+                        input_shape=input_shape))
+model.add(Activation('relu'))
 model.add(Convolution2D(nb_filters, nb_conv, nb_conv))
-model.add(Activation('sigmoid'))
+model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(nb_pool, nb_pool)))
 model.add(Dropout(0.25))
 
 model.add(Flatten())
 model.add(Dense(128))
-model.add(Activation('sigmoid'))
+model.add(Activation('relu'))
 model.add(Dropout(0.5))
 model.add(Dense(nb_classes))
 model.add(Activation('softmax'))

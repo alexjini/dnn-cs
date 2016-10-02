@@ -1,9 +1,5 @@
 '''Train a simple convnet on the MNIST dataset.
-
 Run on GPU: THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python mnist_shallow.py
-
-Get to % test accuracy after 12 epochs (there is still a lot of margin for parameter tuning).
-? seconds per epoch on CPU.
 '''
 
 from __future__ import print_function
@@ -40,13 +36,13 @@ model = Sequential()
 model.add(Dense(10, init='uniform', input_shape=(784,)))
 model.add(Activation('softmax'))
 
-model.compile(loss='mse', optimizer='sgd')
+model.compile(loss='mse', optimizer='sgd', metrics=['accuracy'])
 
 hist = model.fit(X_train, Y_train, batch_size=batch_size,
-                 nb_epoch=nb_epoch, show_accuracy=True,
+                 nb_epoch=nb_epoch,
                  verbose=1, validation_split=0.2)
 
-score = model.evaluate(X_test, Y_test, show_accuracy=True, verbose=0)
+score = model.evaluate(X_test, Y_test, verbose=0)
 
 print('Test score:', score[0])
 print('Test accuracy:', score[1])

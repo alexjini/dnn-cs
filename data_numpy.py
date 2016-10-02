@@ -33,10 +33,11 @@ print 'item size=', c.itemsize, ', size=', c.size
 from keras.models import Sequential
 from keras.layers.core import Dense, Activation
 from keras.optimizers import SGD
+from keras.utils.visualize_util import plot
 
 model = Sequential()
 model.add(Dense(4, init='uniform', input_shape=(2,), activation='softmax'))
-model.compile(loss='mse', optimizer='sgd')
-hist = model.fit(a, c, batch_size=1, nb_epoch=3, show_accuracy=True, verbose=1)
-print hist.history['acc']
+model.compile(loss='mse', optimizer='sgd', metrics=['accuracy'])
+plot(model, to_file='model.png')
 
+model.fit(a, c, batch_size=1, nb_epoch=3, verbose=1)
