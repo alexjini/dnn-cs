@@ -46,18 +46,18 @@ plt.tight_layout()
 plt.show()
 
 # Get output of each layer
-get_1st_layer_output = theano.function([model.layers[0].input], model.layers[1].get_output(train=False))
-get_2nd_layer_output = theano.function([model.layers[0].input], model.layers[3].get_output(train=False))
-get_3rd_layer_output = theano.function([model.layers[0].input], model.layers[8].get_output(train=False))
-get_last_layer_output = theano.function([model.layers[0].input], model.layers[11].get_output(train=False))
+get_1st_layer_output = theano.function([model.layers[0].input], [model.layers[0].output])
+get_2nd_layer_output = theano.function([model.layers[0].input], [model.layers[2].output])
+get_3rd_layer_output = theano.function([model.layers[0].input], [model.layers[7].output])
+get_last_layer_output = theano.function([model.layers[0].input], [model.layers[10].output])
 print('X_test image shape:', X_test.shape)
-layer_1_output = get_1st_layer_output(X_test)
+layer_1_output = get_1st_layer_output(X_test)[0]
 print('Print 1st layer output', layer_1_output.shape)
-layer_2_output = get_2nd_layer_output(X_test)
+layer_2_output = get_2nd_layer_output(X_test)[0]
 print('Print 2nd layer output', layer_2_output.shape)
-layer_3_output = get_3rd_layer_output(X_test)
+layer_3_output = get_3rd_layer_output(X_test)[0]
 print('Print 3rd layer output', layer_3_output.shape)
-layer_last_output = get_last_layer_output(X_test)
+layer_last_output = get_last_layer_output(X_test)[0]
 print('Print last layer output', layer_last_output.shape)
 
 # Predict classes and probability
