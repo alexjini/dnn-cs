@@ -65,12 +65,11 @@ model.add(Dropout(0.5))
 model.add(Dense(nb_classes))
 model.add(Activation('softmax'))
 
-model.compile(loss='categorical_crossentropy', optimizer='adadelta')
+model.compile(loss='categorical_crossentropy', optimizer='adadelta', metrics=['accuracy'])
 
 hist = model.fit(X_train, Y_train, batch_size=batch_size, 
-                 nb_epoch=nb_epoch, show_accuracy=True, 
-				 verbose=1, validation_split=0.2)
-score = model.evaluate(X_test, Y_test, show_accuracy=True, verbose=0)
+                 nb_epoch=nb_epoch,verbose=1, validation_split=0.2)
+score = model.evaluate(X_test, Y_test, verbose=0)
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
 
