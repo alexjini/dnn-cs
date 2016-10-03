@@ -4,7 +4,6 @@ from keras.datasets import mnist
 from keras.models import Sequential
 
 from keras.models import model_from_json
-from keras.utils.visualize_util import plot
 from keras import backend as K
 import matplotlib.pyplot as plt
 import json
@@ -31,7 +30,6 @@ print(X_test.shape[0], 'test samples')
 # Reconstruct model
 model = model_from_json(open('mnist_model_architecture.json').read())
 model.load_weights('mnist_model_weights.h5')
-plot(model, to_file='model.png')
 
 # Plot history
 hist = json.loads(open('mnist_model_history.json').read())
@@ -80,20 +78,20 @@ def plotvalue(index):
         plt.figure('Input data and 1~4 layer output value of X_test[{idx}]'.format(idx=index), figsize=(12,9), dpi=100)
         plt.subplot2grid((5,6),(0,0),rowspan=2,colspan=2)
         plt.title('Input data')
-        plt.imshow(X_test[index][:,:,0], cmap='bone', interpolation='nearest')
+        plt.imshow(X_test[index][0], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,6),(0,2))
-        plt.imshow(layer_1_output[index][:,:,0], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][0], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,6),(0,3))
-        plt.imshow(layer_1_output[index][:,:,1], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][1], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,6),(1,2))
-        plt.imshow(layer_1_output[index][:,:,2], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][2], cmap='bone', interpolation='nearest')
 
         plt.subplot2grid((5,6),(0,4))
-        plt.imshow(layer_2_output[index][:,:,0], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][0], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,6),(0,5))
-        plt.imshow(layer_2_output[index][:,:,1], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][1], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,6),(1,4))
-        plt.imshow(layer_2_output[index][:,:,2], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][2], cmap='bone', interpolation='nearest')
 
         plt.subplot2grid((5,6),(2,0),colspan=6)
         plt.imshow(layer_3_output[index].reshape(1,layer_3_output.shape[1]), cmap='bone', interpolation='nearest')
