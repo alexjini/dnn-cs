@@ -4,7 +4,6 @@ from keras.datasets import cifar10
 from keras.models import Sequential
 
 from keras.models import model_from_json
-from keras.utils.visualize_util import plot
 from keras import backend as K
 import matplotlib.pyplot as plt
 import theano
@@ -33,7 +32,6 @@ print(X_test.shape[0], 'test samples')
 # Reconstruct model
 model = model_from_json(open('cifar10_model_architecture.json').read())
 model.load_weights('cifar10_model_weights.h5')
-plot(model, to_file='model.png')
 
 # Plot history 
 hist = json.loads(open('cifar10_model_history.json').read())
@@ -82,43 +80,43 @@ def plotvalue(index):
         plt.figure('Input data and 1~4 layer output value of X_test[{idx}]'.format(idx=index), figsize=(12,9), dpi=100)
         plt.subplot2grid((5,8),(0,0),rowspan=2,colspan=2)
         plt.title('Input data')
-        plt.imshow(X_test[index])
+        plt.imshow(X_test[index].transpose(1,2,0))
 
         plt.subplot2grid((5,8),(0,2))
-        plt.imshow(layer_1_output[index][:,:,0], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][0], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(0,3))
-        plt.imshow(layer_1_output[index][:,:,1], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][1], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(0,4))
-        plt.imshow(layer_1_output[index][:,:,2], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][2], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(1,2))
-        plt.imshow(layer_1_output[index][:,:,3], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][3], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(1,3))
-        plt.imshow(layer_1_output[index][:,:,4], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_1_output[index][4], cmap='bone', interpolation='nearest')
 
         plt.subplot2grid((5,8),(0,5))
-        plt.imshow(layer_2_output[index][:,:,0], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][0], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(0,6))
-        plt.imshow(layer_2_output[index][:,:,1], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][1], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(0,7))
-        plt.imshow(layer_2_output[index][:,:,2], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][2], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(1,5))
-        plt.imshow(layer_2_output[index][:,:,3], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][3], cmap='bone', interpolation='nearest')
         plt.subplot2grid((5,8),(1,6))
-        plt.imshow(layer_2_output[index][:,:,4], cmap='bone', interpolation='nearest')
+        plt.imshow(layer_2_output[index][4], cmap='bone', interpolation='nearest')
 
         plt.subplot2grid((5,8),(2,0),colspan=8)
         plt.imshow(layer_3_output[index].reshape(1,layer_3_output.shape[1]), cmap='bone', interpolation='nearest')
 
         plt.subplot2grid((5,8),(3,0),colspan=8)
-	plt.title('probability prediction')
-	plt.plot(proba[index],'r',label='probability')
+        plt.title('probability prediction')
+        plt.plot(proba[index],'r',label='probability')
 
-	plt.subplot2grid((5,8),(4,0),colspan=8)
-	plt.title('Last layer output={ans}, y_test={sol}'.format(ans=classes[index],sol=y_test[index]))
-	plt.imshow(layer_last_output[index].reshape(1,layer_last_output.shape[1]), cmap='bone', interpolation='nearest')
+        plt.subplot2grid((5,8),(4,0),colspan=8)
+        plt.title('Last layer output={ans}, y_test={sol}'.format(ans=classes[index],sol=y_test[index]))
+        plt.imshow(layer_last_output[index].reshape(1,layer_last_output.shape[1]), cmap='bone', interpolation='nearest')
 
-	plt.tight_layout()
-	plt.show()
+        plt.tight_layout()
+        plt.show()
 
 # Plot test data
 plotvalue(0)
